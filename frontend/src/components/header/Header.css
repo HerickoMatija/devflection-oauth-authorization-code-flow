@@ -1,0 +1,35 @@
+.header-container {
+    color: #5995DA;
+    background-color: #D6E9FE;
+    display: flex;
+    justify-content: space-around;
+    height: 100px;
+    align-items: center;
+}
+
+a:link,
+a:visited {
+    color: #5D6063;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ffffff;
+}
+
+.menu {
+    margin-top: 15px;
+}
+
+.menu>li {
+    display: inline;
+    margin-right: 50px;
+}
+
+.menu>li:last-of-type {
+    margin-right: 0;
+}
+
+.logo {
+    font-size: x-large;
+}

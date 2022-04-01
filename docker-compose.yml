@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    ports:
+      - 5000:5000
+  resource-server:
+    container_name: resource-server
+    build:
+      context: ./resource-server/
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/app'      
+    ports:
+      - 8080:8080
+  keycloak:
+      image: quay.io/keycloak/keycloak:legacy
+      environment:       
+        KEYCLOAK_USER: admin
+        KEYCLOAK_PASSWORD: admin
+      ports:
+        - 8083:8080

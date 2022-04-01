@@ -1,0 +1,8 @@
+.main-container {      
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch;       
+    width: 80%;
+    margin: auto;
+}
