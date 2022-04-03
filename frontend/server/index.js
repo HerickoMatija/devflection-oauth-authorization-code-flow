@@ -24,10 +24,16 @@ app.get("/players", (req, res) => {
 
 app.get("/authorizationCallback", (req, res) => {
     console.log(req.query.code);
-
     // TODO exchange the code for the acces token
-
     res.send("Callback was called");
+});
+
+app.get("/getAccessToken", (req, res) => {
+    res.send(accessToken);
+});
+
+app.get("/getRefreshToken", (req, res) => {
+    res.send(refreshToken);
 });
 
 app.listen(5000, () => {
