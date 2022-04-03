@@ -10,7 +10,7 @@ function Token(props) {
             .then(resp => resp.json)
             .then(resp => setToken(resp))
             .catch(err => console.log(err));
-    }, []);
+    }, [props.getTokenUrl]);
 
     return (
         <span>
