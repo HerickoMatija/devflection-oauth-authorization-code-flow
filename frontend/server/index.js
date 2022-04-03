@@ -10,16 +10,18 @@ let refreshToken = null;
 
 app.use(express.static(path.join(__dirname, "..", "build")));
 
-// app.get("/myFavouritePlayersInTheNBA", (req, res) => {
-app.get("/players", (req, res) => {
+app.get("/myFavouritePlayersInTheNBA", (req, res) => {
     if (isValid()) {
         // TODO get data, merge it with local and return
     } else if(refreshToken) {
         // TODO refresh and then get data, merge with local etc..        
     } else {
-        console.log(AUTHORIZE_REQUEST_URL);        
-        res.redirect(AUTHORIZE_REQUEST_URL);
+        res.send(EXPRESS_PLAYERS);
     }
+});
+
+app.get("/startOAuthFlow", (req, res) => {
+    res.redirect(AUTHORIZE_REQUEST_URL);
 });
 
 app.get("/authorizationCallback", (req, res) => {
