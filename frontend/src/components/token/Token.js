@@ -13,9 +13,11 @@ function Token(props) {
     }, [props.getTokenUrl]);
 
     return (
-        <span>
-            Current {props.name}:
-            <p>
+        <span className="token-container">
+            <p className="token-message">
+                Current {props.name}:
+            </p>
+            <p className="token-message">
                 {getTokenMessage()}
             </p>
         </span>

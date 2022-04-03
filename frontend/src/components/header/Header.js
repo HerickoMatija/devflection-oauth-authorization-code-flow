@@ -4,10 +4,10 @@ function Header() {
     return (
         <div className='header-container'>
             <div className='logo'>
-                Docker networking frontend
+                OAuth2 Authorization Code Flow
             </div>
             <ul className='menu'>
-                <li><a href='frontend:3000'>Home</a></li>                
+                <li><a href='http://localhost:5000/index.html'>Home</a></li>                
             </ul>
         </div>
     );

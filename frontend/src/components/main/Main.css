@@ -1,8 +1,23 @@
-.main-container {      
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: stretch;       
-    width: 80%;
-    margin: auto;
+.main-container {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: auto;
+  flex-direction: column;
+  border: 5px solid #000; /* For debugging */
 }
+
+.token-group-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+/*
+
+#f8e9a1
+#f76c6c
+#a8d0e6
+#374785
+#24305e
+
+*/
