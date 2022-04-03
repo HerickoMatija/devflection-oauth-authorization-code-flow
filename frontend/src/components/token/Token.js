@@ -15,7 +15,7 @@ function Token(props) {
     return (
         <span className="token-container">
             <p className="token-message">
-                Current {props.name}:
+                <strong>Current {props.name}:</strong>
             </p>
             <p className="token-message">
                 {getTokenMessage()}
