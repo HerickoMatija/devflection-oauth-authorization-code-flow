@@ -2,11 +2,14 @@ const { EXPRESS_PLAYERS } = require('./expressData');
 const { AUTHORIZE_REQUEST_URL } = require('./oauth.js');
 const express = require("express");
 const path = require("path");
+var cors = require('cors')
 const app = express();
 
 let accessToken = null;
 let tokenExpiresAt = null;
 let refreshToken = null;
+
+app.use(cors());
 
 app.use(express.static(path.join(__dirname, "..", "build")));
 
