@@ -1,15 +1,16 @@
 .main-container {
-  display: flex;
-  justify-content: space-between;
-  width: 80%;
-  margin: auto;
+  display: flex;  
+  width: 100%;
+  margin: 0px auto;
   flex-direction: column;
-  border: 5px solid #000; /* For debugging */
+  height: 100%;
+  background-color: #EFEFEF;
 }
 
 .token-group-container {
   display: flex;
   justify-content: space-around;
+  flex: 1;
 }
 
 /*
