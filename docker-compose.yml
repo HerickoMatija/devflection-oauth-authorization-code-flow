@@ -3,21 +3,12 @@ version: '3.7'
 services:
   frontend:
     container_name: frontend
-    build:
-      context: ./frontend/
-      dockerfile: Dockerfile
-    volumes:
-      - '.:/app'
-      - '/app/node_modules'
+    build: ./frontend
     ports:
       - 5000:5000
   resource-server:
     container_name: resource-server
-    build:
-      context: ./resource-server/
-      dockerfile: Dockerfile
-    volumes:
-      - '.:/app'      
+    build: ./resource-server
     ports:
       - 8080:8080
   keycloak:

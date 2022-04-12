@@ -1,16 +1,16 @@
-# pull official base image
-FROM node:14-alpine
-
-# set working directory
+FROM node:14-alpine AS ui-build
 WORKDIR /app
-
-# install app dependencies
-COPY package.json ./
-COPY package-lock.json ./
-RUN npm install --silent
-
-# add app
 COPY . ./
+RUN npm install && npm run build
 
-# start app
+FROM node:14-alpine AS node-js-build
+WORKDIR /app
+COPY --from=ui-build /app/build ./build
+COPY server/ ./server/
+RUN cd server && npm install
+
+EXPOSE 5000
+
+WORKDIR /app/server
+
 CMD ["npm", "start"]
