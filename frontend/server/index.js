@@ -1,8 +1,12 @@
-const { EXPRESS_PLAYERS } = require('./expressData');
-const { AUTHORIZE_REQUEST_URL, TOKEN_ENDPOINT_URL, CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } = require('./oauth.js');
-const express = require("express");
-const path = require("path");
-var cors = require('cors')
+import fetch from "node-fetch";
+import { EXPRESS_PLAYERS } from "./expressData.js";
+import {AUTHORIZE_REQUEST_URL, TOKEN_ENDPOINT_URL, CLIENT_ID, CLIENT_SECRET, REDIRECT_URI} from './oauth.js';
+import express from 'express';
+import path from 'path';
+import cors from 'cors';
+import {fileURLToPath} from 'url';
+
+
 const app = express();
 
 let accessToken = null;
@@ -10,6 +14,9 @@ let tokenExpiresAt = null;
 let refreshToken = null;
 
 app.use(cors());
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(express.static(path.join(__dirname, "..", "build")));
 
@@ -42,7 +49,8 @@ app.get("/authorizationCallback", async (req, res) => {
         })
     }).then(response => {
         if (response.ok) {
-            return response.json();
+            console.log(response);
+            return response;
         }
         throw response;
     }).then(data => res.send(data))
