@@ -7,8 +7,12 @@ function Token(props) {
 
     useEffect(() => {
         fetch(props.getTokenUrl)
-            .then(resp => resp.json)
-            .then(resp => setToken(resp))
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw response;
+            }).then(data => setToken(data))
             .catch(err => console.log(err));
     }, [props.getTokenUrl]);
 

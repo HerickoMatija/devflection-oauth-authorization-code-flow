@@ -3,8 +3,8 @@ import Auth from '../auth/Auth.js';
 import Players from '../players/Players.js';
 import Token from '../token/Token.js';
 
-const ACCESS_TOKEN_URL = "localhost:5000/getAccessToken";
-const REFRESH_TOKEN_URL = "localhost:5000/getRefreshToken";
+const ACCESS_TOKEN_URL = "http://localhost:5000/getAccessToken";
+const REFRESH_TOKEN_URL = "http://localhost:5000/getRefreshToken";
 
 function Main() {
     return (

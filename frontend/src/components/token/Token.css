@@ -8,4 +8,6 @@
 .token-message {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  word-break: break-all;
 }

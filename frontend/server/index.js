@@ -47,22 +47,27 @@ app.get("/authorizationCallback", async (req, res) => {
             'client_secret': CLIENT_SECRET,
             'redirect_uri': REDIRECT_URI
         })
-    }).then(response => {
+    }).then(response => {    
         if (response.ok) {
-            console.log(response);
-            return response;
+            return response.json();
         }
         throw response;
-    }).then(data => res.send(data))
-    .catch(err => res.send(err));
+    }).then(data => {
+        accessToken = data.access_token;
+        refreshToken = data.refresh_token;
+        tokenExpiresAt = data.expires_in;
+        res.redirect("/index.html");
+    }).catch(err => res.send(err));
 });
 
 app.get("/getAccessToken", (req, res) => {
-    res.send(accessToken);
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(accessToken));
 });
 
 app.get("/getRefreshToken", (req, res) => {
-    res.send(refreshToken);
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(refreshToken));
 });
 
 app.listen(5000, () => {
