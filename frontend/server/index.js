@@ -21,13 +21,15 @@ const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, "..", "build")));
 
 app.get("/myFavouritePlayersInTheNBA", (req, res) => {
+    let allPlayers = []
     if (isValid()) {
         // TODO get data, merge it with local and return
     } else if (refreshToken) {
         // TODO refresh and then get data, merge with local etc..        
-    } else {
-        res.send(EXPRESS_PLAYERS);
     }
+    allPlayers.push(...EXPRESS_PLAYERS);
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(allPlayers));
 });
 
 app.get("/startOAuthFlow", (req, res) => {
