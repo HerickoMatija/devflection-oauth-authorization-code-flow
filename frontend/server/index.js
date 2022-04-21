@@ -1,10 +1,10 @@
 import fetch from "node-fetch";
 import { EXPRESS_PLAYERS } from "./expressData.js";
-import {AUTHORIZE_REQUEST_URL, TOKEN_ENDPOINT_URL, CLIENT_ID, CLIENT_SECRET, REDIRECT_URI} from './oauth.js';
+import { AUTHORIZE_REQUEST_URL, TOKEN_ENDPOINT_URL, CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } from './oauth.js';
 import express from 'express';
 import path from 'path';
 import cors from 'cors';
-import {fileURLToPath} from 'url';
+import { fileURLToPath } from 'url';
 
 
 const app = express();
@@ -20,12 +20,16 @@ const __dirname = path.dirname(__filename);
 
 app.use(express.static(path.join(__dirname, "..", "build")));
 
-app.get("/myFavouritePlayersInTheNBA", (req, res) => {
+app.get("/myFavouritePlayersInTheNBA", async (req, res) => {
     let allPlayers = []
     if (isValid()) {
-        // TODO get data, merge it with local and return
+        let playersFromSpringBackend = await getPlayersFromSpringBackend();
+        allPlayers.push(...playersFromSpringBackend);
     } else if (refreshToken) {
-        // TODO refresh and then get data, merge with local etc..        
+        await executeTokenRefresh()
+
+        let playersFromSpringBackend = await getPlayersFromSpringBackend();
+        allPlayers.push(...playersFromSpringBackend);
     }
     allPlayers.push(...EXPRESS_PLAYERS);
     res.setHeader('Content-Type', 'application/json');
@@ -49,7 +53,7 @@ app.get("/authorizationCallback", async (req, res) => {
             'client_secret': CLIENT_SECRET,
             'redirect_uri': REDIRECT_URI
         })
-    }).then(response => {    
+    }).then(response => {
         if (response.ok) {
             return response.json();
         }
@@ -79,4 +83,43 @@ app.listen(5000, () => {
 
 function isValid() {
     return Date.now() < (tokenExpiresAt - 5);
+}
+
+function getPlayersFromSpringBackend() {
+    return fetch("http://localhost:8080/favouritePlayers", {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        }
+    }).then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+        throw response;
+    })
+        .catch(err => res.send(err));
+}
+
+function executeTokenRefresh() {
+    await fetch(TOKEN_ENDPOINT_URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        },
+        body: new URLSearchParams({
+            'grant_type': 'refresh_token',
+            'refresh_token': refreshToken,
+            'client_id': CLIENT_ID,
+            'client_secret': CLIENT_SECRET
+        })
+    }).then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+        throw response;
+    }).then(data => {
+        accessToken = data.access_token;
+        refreshToken = data.refresh_token;
+        tokenExpiresAt = data.expires_in;
+    }).catch(err => err);
 }
