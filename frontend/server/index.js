@@ -26,7 +26,7 @@ app.get("/myFavouritePlayersInTheNBA", async (req, res) => {
         let playersFromSpringBackend = await getPlayersFromSpringBackend();
         allPlayers.push(...playersFromSpringBackend);
     } else if (refreshToken) {
-        await executeTokenRefresh()
+        await executeTokenRefresh();
 
         let playersFromSpringBackend = await getPlayersFromSpringBackend();
         allPlayers.push(...playersFromSpringBackend);
@@ -86,7 +86,7 @@ function isValid() {
 }
 
 function getPlayersFromSpringBackend() {
-    return fetch("http://localhost:8080/favouritePlayers", {
+    return fetch("http://resource-server:8080/favouritePlayers", {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + accessToken
@@ -101,7 +101,7 @@ function getPlayersFromSpringBackend() {
 }
 
 function executeTokenRefresh() {
-    await fetch(TOKEN_ENDPOINT_URL, {
+    fetch(TOKEN_ENDPOINT_URL, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
