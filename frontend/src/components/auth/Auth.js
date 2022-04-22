@@ -1,6 +1,6 @@
 import './Auth.css';
 
-const START_OAUTH = "http://localhost:5000/startOAuthFlow"
+const START_OAUTH = "/startOAuthFlow";
 
 function Auth() {
 
