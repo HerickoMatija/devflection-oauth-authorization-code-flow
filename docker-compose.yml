@@ -4,6 +4,15 @@ services:
   frontend:
     container_name: frontend
     build: ./frontend
+    environment:
+      - NODE_SERVER=http://localhost:5000
+      - RESOURCE_SERVER_PLAYERS_ENDPOINT=http://resource-server:8080/favouritePlayers
+      - CLIENT_ID=devflection-node-js
+      - CLIENT_SECRET=0xzlVWbEM8YQudWtWV5Qje4DCI8RwgCe
+      - SCOPE=devflectionPlayers
+      - TOKEN_ENDPOINT_URL=http://keycloak:8080/auth/realms/master/protocol/openid-connect/token
+      - AUTHORIZE_REQUEST_URL=http://localhost:8083/auth/realms/master/protocol/openid-connect/auth
+      - REDIRECT_URI=http://localhost:5000/authorizationCallback      
     ports:
       - 5000:5000
   resource-server:

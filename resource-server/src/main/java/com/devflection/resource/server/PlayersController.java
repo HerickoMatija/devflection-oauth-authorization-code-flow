@@ -16,11 +16,13 @@ public class PlayersController {
     @CrossOrigin(origins = "*")
     List<String> healthcheck() {
         return List.of(
-            "Luka Dončič",
-            "Kyrie Irving",
-            "Giannis Antetokounmpo",
-            "Stephen Curry"
-        );
+                "Michael Jordan",
+                "LeBron James",
+                "Kobe Bryant",
+                "Luka Dončič",
+                "Kyrie Irving",
+                "Giannis Antetokounmpo",
+                "Stephen Curry");
     }
 
 }
