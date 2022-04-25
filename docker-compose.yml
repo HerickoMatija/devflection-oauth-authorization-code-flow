@@ -8,7 +8,7 @@ services:
       - NODE_SERVER=http://localhost:5000
       - RESOURCE_SERVER_PLAYERS_ENDPOINT=http://resource-server:8080/favouritePlayers
       - CLIENT_ID=devflection-node-js
-      - CLIENT_SECRET=BID5z7q66LD4wkjOGVhkn9z7fyo1NaDE
+      - CLIENT_SECRET=MDLMGUtpSKdZ8C9ctccKJVPl6nZBu20D
       - SCOPE=devflectionPlayers
       - TOKEN_ENDPOINT_URL=http://keycloak:8080/auth/realms/master/protocol/openid-connect/token
       - AUTHORIZE_REQUEST_URL=http://localhost:8083/auth/realms/master/protocol/openid-connect/auth
@@ -29,5 +29,8 @@ services:
       environment:       
         KEYCLOAK_USER: admin
         KEYCLOAK_PASSWORD: admin
+        #KEYCLOAK_DB: dev-file
+      volumes:
+        - ./keycloak/data:/opt/jboss/keycloak/standalone/data/
       ports:
         - 8083:8080
