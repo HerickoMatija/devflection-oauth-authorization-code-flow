@@ -9,16 +9,5 @@
 
 .token-group-container {
   display: flex;
-  justify-content: space-around;
-  flex: 1;
+  justify-content: space-around;  
 }
-
-/*
-
-#f8e9a1
-#f76c6c
-#a8d0e6
-#374785
-#24305e
-
-*/
