@@ -10,7 +10,7 @@ function Auth() {
 
     return (
         <div className='auth-container'>
-            <button className="auth-btn" onClick={redirect}>
+            <button className="btn" onClick={redirect}>
                 Get the access token!
             </button>
         </div>

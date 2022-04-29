@@ -29,7 +29,7 @@ app.get("/myFavouritePlayersInTheNBA", async (req, res) => {
     }).then(data => {
         res.setHeader('Content-Type', 'application/json');
         res.end(JSON.stringify(data));
-    }).catch(err => res.send(err));
+    }).catch(err => res.sendStatus(err.status));
 });
 
 app.get("/startOAuthFlow", (req, res) => {
