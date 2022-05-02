@@ -5,14 +5,13 @@ services:
     container_name: frontend
     build: ./frontend
     environment:
-      - NODE_SERVER=http://localhost:5000
-      - RESOURCE_SERVER_PLAYERS_ENDPOINT=http://resource-server:8080/favouritePlayers
       - CLIENT_ID=devflection-node-js
       - CLIENT_SECRET=MDLMGUtpSKdZ8C9ctccKJVPl6nZBu20D
       - SCOPE=devflectionPlayers
       - TOKEN_ENDPOINT_URL=http://keycloak:8080/auth/realms/master/protocol/openid-connect/token
       - AUTHORIZE_REQUEST_URL=http://localhost:8083/auth/realms/master/protocol/openid-connect/auth
-      - REDIRECT_URI=http://localhost:5000/authorizationCallback      
+      - REDIRECT_URI=http://localhost:5000/authorizationCallback
+      - RESOURCE_SERVER_PLAYERS_ENDPOINT=http://resource-server:8080/favouritePlayers
     ports:
       - 5000:5000
   resource-server:
@@ -25,8 +24,8 @@ services:
     ports:
       - 8080:8080
   keycloak:
-      image: quay.io/keycloak/keycloak:legacy
-      volumes:
-        - ./keycloak/data:/opt/jboss/keycloak/standalone/data/
-      ports:
-        - 8083:8080
+    image: quay.io/keycloak/keycloak:legacy
+    volumes:
+      - ./keycloak/data:/opt/jboss/keycloak/standalone/data/
+    ports:
+      - 8083:8080

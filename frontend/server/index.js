@@ -48,7 +48,7 @@ app.get("/authorizationCallback", async (req, res) => {
             'code': req.query.code,
             'client_id': process.env.CLIENT_ID,
             'client_secret': process.env.CLIENT_SECRET,
-            'redirect_uri': getRedirectUri()
+            'redirect_uri': process.env.REDIRECT_URI
         })
     }).then(response => {
         if (response.ok) {
@@ -71,10 +71,6 @@ app.listen(5000, () => {
 });
 
 function prepareAuthorizeRedirectUrl() {
-    const redirectUri = encodeURIComponent(getRedirectUri());
+    const redirectUri = encodeURIComponent(process.env.REDIRECT_URI);
     return `${process.env.AUTHORIZE_REQUEST_URL}?response_type=code&scope=${process.env.SCOPE}&state=xyz&client_id=${process.env.CLIENT_ID}&redirect_uri=${redirectUri}`;
-}
-
-function getRedirectUri() {
-    return process.env.NODE_SERVER + "/authorizationCallback";
 }
