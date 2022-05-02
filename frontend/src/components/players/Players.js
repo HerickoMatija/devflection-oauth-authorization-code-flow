@@ -21,11 +21,9 @@ function Players() {
                         setError("The request was rejected as unathorized!");
                     } else {
                         setError("There was a problem with the request!");
-                    }                    
+                    }
                 });
-        },
-        [setFavouritePlayers, setError]
-    );
+        });
 
     return (
         <div className='players-container'>
@@ -34,12 +32,12 @@ function Players() {
             </span>
             <span className='players-message'>
                 {getPlayers()}
-            </span>            
+            </span>
         </div>
     );
 
     function getPlayers() {
-        if (error) {            
+        if (error) {
             return <p>{error}</p>
         }
 

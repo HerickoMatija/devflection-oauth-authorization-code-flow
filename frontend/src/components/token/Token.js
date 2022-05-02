@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './Token.css';
 
-function Token(props) {
+const GET_TOKEN_URL = "/getAccessToken";
+
+function Token() {
 
     const [token, setToken] = useState(null);
 
     useEffect(() => {
-        fetch(props.getTokenUrl)
+        fetch(GET_TOKEN_URL)
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -14,12 +16,12 @@ function Token(props) {
                 throw response;
             }).then(data => setToken(data))
             .catch(err => console.log(err));
-    }, [props.getTokenUrl]);
+    });
 
     return (
         <span className="token-container">
             <p className="token-message">
-                <strong>Current {props.name}:</strong>
+                <strong>Current access token:</strong>
             </p>
             <p className="token-message">
                 {getTokenMessage()}
@@ -31,7 +33,7 @@ function Token(props) {
         if (token) {
             return token;
         } else {
-            return "There is currently no " + props.name;
+            return "There is currently no access token";
         }
     }
 }
