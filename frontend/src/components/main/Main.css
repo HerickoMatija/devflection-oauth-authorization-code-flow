@@ -5,6 +5,7 @@
   flex-direction: column;
   height: 100%;
   background-color: #EFEFEF;
+  justify-content: space-around;
 }
 
 .token-group-container {
