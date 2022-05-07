@@ -15,8 +15,8 @@ const __dirname = path.dirname(__filename);
 
 app.use(express.static(path.join(__dirname, "..", "build")));
 
-app.get("/myFavouritePlayersInTheNBA", async (req, res) => {
-    await fetch(process.env.RESOURCE_SERVER_PLAYERS_ENDPOINT, {
+app.get("/myFavouritePlayersInTheNBA", (req, res) => {
+    fetch(process.env.RESOURCE_SERVER_PLAYERS_ENDPOINT, {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + accessToken
@@ -37,8 +37,8 @@ app.get("/startOAuthFlow", (req, res) => {
     res.redirect(authorizeRedirectUrl);
 });
 
-app.get("/authorizationCallback", async (req, res) => {
-    await fetch(process.env.TOKEN_ENDPOINT_URL, {
+app.get("/authorizationCallback", (req, res) => {
+    fetch(process.env.TOKEN_ENDPOINT_URL, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
